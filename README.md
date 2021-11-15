@@ -1,8 +1,8 @@
 # <b> _**Logistics SA**_ </b>
 
-    FIBA Data Base is software that allows us to quickly organize a gigantic data list 
-    of the most promising basketball players. In addition to looking for information 
-    about a player on the list faster.
+    Logistics SA is a software with a graphical interface (GUI) that allows to optimize 
+    the deliveries of a logistics company. Adding places to which the shipments will be 
+    made and showing the shortest way to make them.
 
 ## <b> _Documentation_ </b> 📄
 
@@ -18,7 +18,7 @@
 
 ## <b> _Overview_ </b> 💻🕹️
 
-##coming soon...
+## coming soon...
 
 
 
