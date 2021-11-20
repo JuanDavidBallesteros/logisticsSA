@@ -1,8 +1,10 @@
 package collections.graph;
 
-public interface GraphActions<V, K> {
-    public void addNode(V node);
-    public void addEdge(V from, V dest);
+import exception.GraphException;
+
+public interface GraphActions<K, V> {
+    public void addNode(V node, K key);
+    //public void addEdge(V from, V dest) throws GraphException;
     public int countNodes();
     public int countEdges();
     public boolean hasNode(V node);

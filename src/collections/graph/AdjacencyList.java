@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdjacencyList<K, V> implements GraphActions<V, K> {
+import exception.GraphException;
+
+public class AdjacencyList<K, V> implements GraphActions<K, V> {
 
     private Map<V, ArrayList<V>> map;
     private Map<K,V> searchMap;
@@ -15,17 +17,18 @@ public class AdjacencyList<K, V> implements GraphActions<V, K> {
     }
 
     @Override
-    public void addNode(V node) {
+    public void addNode(V node, K key) {
         map.put(node, new ArrayList<>());
+        searchMap.put(key, node);
     }
 
-    @Override
-    public void addEdge(V from, V dest) {
+    //@Override
+    public void addEdge(V from, V dest) throws GraphException {
         if (!map.containsKey(from)) {
-            addNode(from);
+            throw new GraphException(true);
         }
         if (!map.containsKey(dest)) {
-            addNode(dest);
+            throw new GraphException(false);
         }
         map.get(from).add(dest);
         map.get(dest).add(from);
