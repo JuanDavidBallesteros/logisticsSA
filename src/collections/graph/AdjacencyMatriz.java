@@ -88,4 +88,9 @@ public class AdjacencyMatriz<K,V> implements GraphActions<K,V> {
         }
         return sb.toString();
     }
+
+    public int[][] getMatriz() {
+        return matriz;
+    }
+    
 }
