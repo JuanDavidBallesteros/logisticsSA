@@ -3,9 +3,13 @@ package controller;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.App;
 
 public class MainGui {
 	
+    public MainGui(App app) {
+    }
+
     public void alert(AlertType type, String title, String msg) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
