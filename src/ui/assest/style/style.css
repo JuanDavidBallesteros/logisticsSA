@@ -1,0 +1,56 @@
+ .title1{
+    -fx-font-family: "Ubuntu";
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+    -fx-text-fill: rgb(255, 255, 255);
+}
+.title2{
+    -fx-font-family: "Ubuntu";
+    -fx-font-size: 30px;
+    -fx-text-fill: rgb(255, 255, 255);
+}
+.normalText{
+    -fx-font-family: "Ubuntu";
+    -fx-font-size: 14px;
+    -fx-text-fill: rgb(255, 255, 255);
+}
+.goBTN{
+    -fx-background-color: linear-gradient(to right,#991b1b ,#d35400);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+.goBTN:hover{
+    -fx-background-color: linear-gradient(to right,#b41f1f ,#e65e03);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+.basicBTN{
+    -fx-background-color :none ;
+    -fx-border-color: rgb(255, 255, 255) ;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+    -fx-text-fill: rgb(255, 255, 255);
+}
+.basicBTN:hover{
+    -fx-background-color :none ;
+    -fx-border-color: rgb(228, 91, 67) ;
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
+    -fx-text-fill: rgb(218, 218, 218);
+}
+.bg1 {
+    -fx-background-color : rgb(17, 17, 17);
+}
+.bg2 {
+    -fx-background-color : rgb(37, 37, 37);
+    -fx-background-radius: 10px ;
+    
+}
+.text-field{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: linear-gradient(to right,#8b4242 ,#c57844);
+}
+

@@ -2,16 +2,18 @@ package model;
 
 public class Store {
 
+    private static final long serialVersionUID = 134231;
+
     private int id;
     private String size;
-    private String Owner;
-    private String Order;
+    private String owner;
+    private String order;
 
     public Store(int id, String size, String owner, String order) {
         this.id = id;
         this.size = size;
-        Owner = owner;
-        Order = order;
+        this.owner = owner;
+        this.order = order;
     }
 
     public int getId() {
@@ -31,21 +33,24 @@ public class Store {
     }
 
     public String getOwner() {
-        return Owner;
+        return owner;
     }
 
     public void setOwner(String owner) {
-        Owner = owner;
+        this.owner = owner;
     }
 
     public String getOrder() {
-        return Order;
+        return order;
     }
 
     public void setOrder(String order) {
-        Order = order;
+        this.order = order;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return id + "," + owner + "," + order;
+    }
+
 }
