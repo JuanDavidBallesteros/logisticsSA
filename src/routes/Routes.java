@@ -2,7 +2,7 @@ package routes;
 
 public enum Routes {
     
-    MAIN_VIEW("../ui/assets/main.fxml");
+    CONFIG_VIEW("../ui/configurationView.fxml");
 
     private String route;
 

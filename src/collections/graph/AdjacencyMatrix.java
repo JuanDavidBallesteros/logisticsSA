@@ -5,17 +5,17 @@ import java.util.Map;
 
 import exception.GraphException;
 
-public class AdjacencyMatriz<K,V> implements GraphActions<K,V> {
+public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
 
-    private int[][] matriz;
+    private int[][] matrix;
     private Map<K,V> nodes;
     private Map<V,Integer> searchMap;
     private int edges;
     private int nodesNum;
 
-    public AdjacencyMatriz(int nodesNum){
+    public AdjacencyMatrix(int nodesNum){
         nodes = new HashMap<>();
-        matriz = new int[nodesNum][nodesNum];
+        matrix = new int[nodesNum][nodesNum];
         searchMap = new HashMap<>();
         this.nodesNum = nodesNum;
     }
@@ -40,8 +40,8 @@ public class AdjacencyMatriz<K,V> implements GraphActions<K,V> {
         int fNum = searchMap.get(from);
         int dNum = searchMap.get(dest);
 
-        matriz[fNum][dNum] = weight;
-        matriz[dNum][fNum] = weight;
+        matrix[fNum][dNum] = weight;
+        matrix[dNum][fNum] = weight;
         edges++;
     }
 
@@ -64,7 +64,7 @@ public class AdjacencyMatriz<K,V> implements GraphActions<K,V> {
     public boolean hasEdge(V from, V dest) {
         int fNum = searchMap.get(from);
         int dNum = searchMap.get(dest);
-        boolean res = (matriz[fNum][dNum] != 0) ? true : false;
+        boolean res = (matrix[fNum][dNum] != 0) ? true : false;
         return res;
     }
 
@@ -79,9 +79,9 @@ public class AdjacencyMatriz<K,V> implements GraphActions<K,V> {
         for (int i = 0; i < nodesNum; i++) {
             for (int j = 0; j < nodesNum; j++) {
                 if(j == nodesNum-1){
-                    sb.append(matriz[i][j]);
+                    sb.append(matrix[i][j]);
                 } else {
-                    sb.append(matriz[i][j] + " | ");
+                    sb.append(matrix[i][j] + " | ");
                 }
             }
             sb.append("\n");
@@ -89,8 +89,8 @@ public class AdjacencyMatriz<K,V> implements GraphActions<K,V> {
         return sb.toString();
     }
 
-    public int[][] getMatriz() {
-        return matriz;
+    public int[][] getMatrix() {
+        return matrix;
     }
     
 }

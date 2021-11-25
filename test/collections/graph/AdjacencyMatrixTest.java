@@ -6,17 +6,17 @@ import org.junit.Test;
 
 import exception.GraphException;
 
-public class AdjacencyMatrizTest {
+public class AdjacencyMatrixTest {
 
-	private AdjacencyMatriz<Integer, String> graph;
+	private AdjacencyMatrix<Integer, String> graph;
 
 	private void setupScenery1() {
-		graph = new AdjacencyMatriz<>(5);
+		graph = new AdjacencyMatrix<>(5);
 	}
 
 	private void setupScenery2() {
 
-		graph = new AdjacencyMatriz<>(5);
+		graph = new AdjacencyMatrix<>(5);
 		graph.addNode("node0", 0);
 		graph.addNode("node1", 1);
 		graph.addNode("node2", 2);
@@ -26,7 +26,7 @@ public class AdjacencyMatrizTest {
 
 	private void setupScenery3() throws GraphException {
 
-		graph = new AdjacencyMatriz<>(5);
+		graph = new AdjacencyMatrix<>(5);
 		graph.addNode("node0", 0);
 		graph.addNode("node1", 1);
 		graph.addNode("node2", 2);
@@ -41,7 +41,7 @@ public class AdjacencyMatrizTest {
 
 	@Test
 	public void testAdjacencyMatriz() throws Exception {
-		graph = new AdjacencyMatriz<>(5);
+		graph = new AdjacencyMatrix<>(5);
 		assertNotNull(graph);
 	}
 
@@ -105,7 +105,7 @@ public class AdjacencyMatrizTest {
 			{1 , 0 , 2 , 0 , 0},
 		};
 
-		int[][] result = graph.getMatriz();
+		int[][] result = graph.getMatrix();
 
 		for (int i = 0; i < validate.length; i++) {
 			for (int j = 0; j < result.length; j++) {
