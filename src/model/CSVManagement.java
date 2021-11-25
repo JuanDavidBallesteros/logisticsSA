@@ -67,9 +67,9 @@ public class CSVManagement<K> {
         strategy.setColumnMapping(mapping);
 
         // Create castobaen and csvreader object
-        CSVReader csvReader = null;
+        
         try {
-            csvReader = new CSVReader(new FileReader(path));
+            CSVReader csvReader = new CSVReader(new FileReader(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

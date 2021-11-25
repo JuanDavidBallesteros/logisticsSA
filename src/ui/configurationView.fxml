@@ -9,12 +9,13 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" styleClass="bg1" stylesheets="@assest/style/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="114.0" layoutY="97.0" styleClass="title1" text="Bienvenidos" />
-      <Label layoutX="403.0" layoutY="116.0" styleClass="title2" text="a Logistics S.A." />
+      <Label layoutX="115.0" layoutY="53.0" styleClass="title1" text="Bienvenidos" />
+      <Label layoutX="404.0" layoutY="72.0" styleClass="title2" text="a Logistics S.A." />
       <Button layoutX="727.0" layoutY="547.0" mnemonicParsing="false" onAction="#calculateBTN" prefHeight="49.0" prefWidth="182.0" styleClass="goBTN" text="Calcular" textOverrun="LEADING_WORD_ELLIPSIS" />
-      <VBox alignment="CENTER" layoutX="458.0" layoutY="227.0" prefHeight="269.0" prefWidth="327.0" spacing="30.0" styleClass="bg2">
+      <VBox alignment="CENTER" layoutX="458.0" layoutY="153.0" prefHeight="343.0" prefWidth="327.0" spacing="30.0" styleClass="bg2">
          <children>
-            <Button mnemonicParsing="false" onAction="#fileBTN" prefHeight="29.0" prefWidth="182.0" styleClass="basicBTN" text="Seleccionar Archivo" textOverrun="LEADING_WORD_ELLIPSIS" />
+            <Button mnemonicParsing="false" onAction="#fileBTN" prefHeight="29.0" prefWidth="182.0" styleClass="basicBTN" text="Seleccionar Tiendas" textOverrun="LEADING_WORD_ELLIPSIS" />
+            <Button mnemonicParsing="false" onAction="#fileConnectionsBTN" prefHeight="29.0" prefWidth="182.0" styleClass="basicBTN" text="Seleccionar Conexiones" textOverrun="LEADING_WORD_ELLIPSIS" />
             <TextField fx:id="bigCarsTF" prefHeight="37.0" prefWidth="171.0" promptText="# Vehiculos Grandes" />
             <TextField fx:id="mediumCarsTF" prefHeight="37.0" prefWidth="171.0" promptText="# Vehiculos Medianos" />
             <TextField fx:id="smallCarsTF" prefHeight="37.0" prefWidth="171.0" promptText="# Vehiculos Pequeños" />

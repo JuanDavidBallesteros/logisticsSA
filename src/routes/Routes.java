@@ -2,7 +2,7 @@ package routes;
 
 public enum Routes {
     
-    CONFIG_VIEW("../ui/configurationView.fxml");
+    CONFIG_VIEW("../ui/configurationView.fxml"), RESULTS_VIEW("../ui/resultsView.fxml");
 
     private String route;
 

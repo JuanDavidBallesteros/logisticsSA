@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import model.App;
+import routes.Routes;
 
 public class ConfigurationController {
 
@@ -38,6 +39,16 @@ public class ConfigurationController {
             fileChooser.setTitle("Choose File");
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow()); // stage.getScene().getWindow() - stage
             if (file != null) {
+                app.importStores(file.getPath());
+            }
+    }
+
+    @FXML
+    void fileConnectionsBTN(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose File");
+            File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow()); // stage.getScene().getWindow() - stage
+            if (file != null) {
                 System.out.println("HOLA");
             }
     }
@@ -55,4 +66,6 @@ public class ConfigurationController {
             e.printStackTrace();
         }
     }
+
+    
 }
