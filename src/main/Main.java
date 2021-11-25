@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.App;
+import routes.Routes;
 
 public class Main extends Application {
 
@@ -21,7 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ui/configurationView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Routes.CONFIG_VIEW.toString()));
         fxmlLoader.setController(controller);
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
