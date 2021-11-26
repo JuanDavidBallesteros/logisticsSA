@@ -3,89 +3,54 @@ package model;
 import java.io.*;
 import java.util.*;
 
-import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.HeaderColumnNameTranslateMappingStrategy;
 
-public class CSVManagement<K> {
+import collections.graph.AdjacencyList;
+import collections.graph.AdjacencyMatrix;
 
-    public ArrayList<Store> importStores(String path, int size) {
-        // Hashmap to map CSV data to
-        // Bean attributes.
-        Map<String, String> mapping = new HashMap<String, String>();
+public class CSVManagement {
 
-        mapping.put("id", "id");
-        mapping.put("size", "size");
-        mapping.put("owner", "owner");
-        mapping.put("order", "order");
+    public ArrayList<Store> importStores(String path, int nodes) throws IOException, FileNotFoundException {
 
-        // HeaderColumnNameTranslateMappingStrategy
-        // for Student class
-        HeaderColumnNameTranslateMappingStrategy<Store> strategy = new HeaderColumnNameTranslateMappingStrategy<Store>();
-        strategy.setType(Store.class);
-        strategy.setColumnMapping(mapping);
+        ArrayList<Store> list = new ArrayList<>();
 
-        // Create castobaen and csvreader object
-        CSVReader csvReader = null;
-        try {
-            csvReader = new CSVReader(new FileReader(path));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        String line = br.readLine();
+
+        line = br.readLine();
+
+        while (line != null) {
+            String[] parts = line.split(","); 
+            Store temp = new Store(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3]);
+            list.add(temp);
+            line = br.readLine();
         }
 
-        CsvToBean<Store> csvToBean = new CsvToBean<>();
-
-        // call the parse method of CsvToBean
-        // pass strategy, csvReader to parse method
-        ArrayList<Store> list = (ArrayList<Store>) csvToBean.parse();
-
-        size = list.size();
-
-        // print details of Bean object
-        for (Store e : list) {
-            System.out.println(e);
-        }
+        br.close();
+        nodes = list.size();
 
         return list;
+              
     }
 
-    @SuppressWarnings("unchecked")
-    public ArrayList<Connection<K>> importConnections(String path) {
-        // Hashmap to map CSV data to
-        // Bean attributes.
-        Map<String, String> mapping = new HashMap<String, String>();
+    public ArrayList<Connection<Integer>> importConnections(String path) throws IOException, FileNotFoundException {
 
-        mapping.put("node1", "node1");
-        mapping.put("node2", "node2");
-        mapping.put("weight", "weight");
+        ArrayList<Connection<Integer>> list = new ArrayList<>();
 
-        // HeaderColumnNameTranslateMappingStrategy
-        // for Student class
-        HeaderColumnNameTranslateMappingStrategy<Connection<K>> strategy = new HeaderColumnNameTranslateMappingStrategy<Connection<K>>();
-        strategy.setType((Class<? extends Connection<K>>) Connection.class);
-        strategy.setColumnMapping(mapping);
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        String line = br.readLine();
 
-        // Create castobaen and csvreader object
-        
-        try {
-            CSVReader csvReader = new CSVReader(new FileReader(path));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        line = br.readLine();
+
+        while (line != null) {
+            String[] parts = line.split(","); 
+            Connection<Integer> temp = new Connection<Integer>(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+            list.add(temp);
+            line = br.readLine();
         }
 
-        CsvToBean<Connection<K>> csvToBean = new CsvToBean<>();
-
-        // call the parse method of CsvToBean
-        // pass strategy, csvReader to parse method
-        ArrayList<Connection<K>> list = (ArrayList<Connection<K>>) csvToBean.parse();
-
-        // print details of Bean object
-        for (Connection<K> e : list) {
-            System.out.println(e);
-        }
-
-        return list;
+        br.close();    
+        return list;  
     }
 
     void exportRoutes(File file, ArrayList<Store> list) throws IOException {

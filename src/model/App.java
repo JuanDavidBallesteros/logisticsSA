@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import exception.GraphException;
 public class App {
     private ArrayList<Store> smallStores, mediumStores, bigStores;
 
-    private CSVManagement<Integer> csv;
+    private CSVManagement csv;
 
     private AdjacencyList<Integer, Store> graph4Routes;
     private AdjacencyMatrix<Integer, Store> graph4Cost;
@@ -26,7 +27,7 @@ public class App {
 
         graph4Routes = new AdjacencyList<>();
 
-        csv = new CSVManagement<>();
+        csv = new CSVManagement();
     }
 
     public void setVariables(int nodes, int small, int medium, int big){
@@ -38,7 +39,7 @@ public class App {
 
     // -----------------------------------------------> Imports / Exports
 
-    public void importStores(String path){
+    public void importStores(String path) throws FileNotFoundException, IOException{
         ArrayList<Store> list = csv.importStores(path, nodes);
         graph4Cost = new AdjacencyMatrix<>(nodes);
         for (Store store : list) {
@@ -47,7 +48,7 @@ public class App {
         }
     }
 
-    public void importConnections(String path) throws GraphException{
+    public void importConnections(String path) throws GraphException, FileNotFoundException, IOException{
         ArrayList<Connection<Integer>> list = csv.importConnections(path);
         graph4Cost = new AdjacencyMatrix<>(nodes);
         for (Connection<Integer> edge : list) {
@@ -89,11 +90,11 @@ public class App {
         this.bigStores = bigStores;
     }
 
-    public CSVManagement<Integer> getCsv() {
+    public CSVManagement getCsv() {
         return csv;
     }
 
-    public void setCsv(CSVManagement<Integer> csv) {
+    public void setCsv(CSVManagement csv) {
         this.csv = csv;
     }
 

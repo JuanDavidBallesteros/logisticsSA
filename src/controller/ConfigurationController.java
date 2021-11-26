@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 
+import exception.GraphException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,22 +36,31 @@ public class ConfigurationController {
 
     @FXML
     void fileBTN(ActionEvent event) {
+        try {
         FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Choose File");
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow()); // stage.getScene().getWindow() - stage
             if (file != null) {
-                app.importStores(file.getPath());
-            }
+                    app.importStores(file.getPath());
+                }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            
     }
 
     @FXML
     void fileConnectionsBTN(ActionEvent event) {
+        try {
         FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Choose File");
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow()); // stage.getScene().getWindow() - stage
             if (file != null) {
-                System.out.println("HOLA");
+                app.importConnections(file.getPath());
             }
+        } catch (IOException | GraphException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -65,6 +75,7 @@ public class ConfigurationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
 
     

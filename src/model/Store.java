@@ -2,8 +2,6 @@ package model;
 
 public class Store {
 
-    private static final long serialVersionUID = 134231;
-
     private int id;
     private String size;
     private String owner;
