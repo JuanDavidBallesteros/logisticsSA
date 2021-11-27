@@ -39,16 +39,18 @@ public class App {
 
     // -----------------------------------------------> Imports / Exports
 
-    public void importStores(String path) throws FileNotFoundException, IOException{
+    public int importStores(String path) throws FileNotFoundException, IOException{
         ArrayList<Store> list = csv.importStores(path, nodes);
         graph4Cost = new AdjacencyMatrix<>(nodes);
         for (Store store : list) {
             graph4Routes.addNode(store, store.getId());
             graph4Cost.addNode(store, store.getId());
         }
+
+        return list.size();
     }
 
-    public void importConnections(String path) throws GraphException, FileNotFoundException, IOException{
+    public int importConnections(String path) throws GraphException, FileNotFoundException, IOException{
         ArrayList<Connection<Integer>> list = csv.importConnections(path);
         graph4Cost = new AdjacencyMatrix<>(nodes);
         for (Connection<Integer> edge : list) {
@@ -57,6 +59,7 @@ public class App {
             graph4Routes.addEdge(s1, s2);
             graph4Cost.addEdge(s1, s2, edge.getWeight());
         }
+        return list.size();
     }
 
     public void exportList(File file, ArrayList<Store> list) throws IOException{

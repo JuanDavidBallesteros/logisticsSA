@@ -1,5 +1,7 @@
 package collections.graph;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
     private int[][] matrix;
     private Map<K,V> nodes;
     private Map<V,Integer> searchMap;
+    private Map<Integer,V> numbers;
     private int edges;
     private int nodesNum;
 
@@ -17,6 +20,7 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
         nodes = new HashMap<>();
         matrix = new int[nodesNum][nodesNum];
         searchMap = new HashMap<>();
+        numbers = new HashMap<>();
         this.nodesNum = nodesNum;
     }
 
@@ -25,6 +29,7 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
         int num = nodes.size();
         searchMap.put(node, num);
         nodes.put(key, node);
+        numbers.put(num, node);
     }
 
     //@Override
@@ -72,6 +77,14 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
     public V getNode(K key) {
         return nodes.get(key);
     }
+
+    public V getNodeByPos(int num) {
+        return numbers.get(num);
+    }
+
+    public int getPosByKey(K key) {
+        return searchMap.get(nodes.get(key));
+    }
     
     @Override
     public String toString(){
@@ -91,6 +104,15 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
 
     public int[][] getMatrix() {
         return matrix;
+    }
+
+    public ArrayList<V>getNodes(){
+        ArrayList<V> list = new ArrayList<>();
+        while (searchMap.keySet().iterator().hasNext()) {
+            list.add(searchMap.keySet().iterator().next());
+        }
+        return list;
+        
     }
     
 }

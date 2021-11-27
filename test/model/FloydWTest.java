@@ -2,6 +2,8 @@ package model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class FloydWTest {
@@ -55,6 +57,24 @@ public class FloydWTest {
 	}
 
 	@Test
+	public void testRoute() throws Exception {
+		setupScenery1();
+		
+		int[][] validate = {
+			{0 , 5 , 3 , 4 , 18 , 19},
+			{5 , 0 , 2 , 1 , 13 , 14},
+			{3 , 2 , 0 , 1 , 15 , 16},
+			{4 , 1 , 1 , 0 , 14 , 15},
+			{18 , 13 , 15 , 14 , 0 , 1},
+			{19 , 14 , 16 , 15 , 1 , 0}
+		};
+
+		FloydW m = new FloydW(dis);
+		ArrayList<Integer> result = m.route(0, 3);
+		System.out.println(result);		
+	}
+
+    @Test
 	public void testCalculate() throws Exception {
 		setupScenery1();
 		

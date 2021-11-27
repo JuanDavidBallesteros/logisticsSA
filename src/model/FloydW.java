@@ -1,47 +1,97 @@
 package model;
 
+import java.util.ArrayList;
+
 public class FloydW {
 
-    private int[][] matriz;
+    private int[][] matrix;
+    private int[][] parent;
     private int numNodes;
 
-    public FloydW(int[][] matriz) {
-        this.matriz = matriz;
-        this.numNodes = matriz.length;
+    public FloydW(int[][] matrix) {
+        this.matrix = matrix;
+        this.numNodes = matrix.length;
+        parent = new int [matrix.length][matrix.length];
     }
 
     public int[][] calculate() {
-        int[][] m = matriz.clone();
+        matrix = matrix.clone();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                parent[i][j] = i;
+            }
+        }
 
         for (int i = 0; i < numNodes; i++) {
             for (int j = 0; j < numNodes; j++) {
                 for (int k = 0; k < numNodes; k++) {
-                    if (m[j][i] != Integer.MAX_VALUE && m[i][k] != Integer.MAX_VALUE) {
-                        if (m[j][k] > m[j][i] + m[i][k]) {
-                            m[j][k] = m[j][i] + m[i][k];
+                    if (matrix[j][i] != Integer.MAX_VALUE && matrix[i][k] != Integer.MAX_VALUE) {
+                        if (matrix[j][k] > matrix[j][i] + matrix[i][k]) {
+                            matrix[j][k] = matrix[j][i] + matrix[i][k];
+                            parent[j][k] = parent[i][k];
                         }
                     }
                 }
             }
         }
 
-        return m;
+        return matrix;
+    }
+
+    public ArrayList<Integer> route(int key1, int key2){
+        print(matrix);
+        calculate();
+        print(matrix);
+
+        System.out.println("-------------------------------------****");
+        ArrayList<Integer> list = new ArrayList<>();
+
+            // for (int i = 0; i < matrix.length; i++) {
+            //     for (int j = 0; j < matrix.length; j++) {
+            //         parent[i][j] = i;
+            //     }
+            // }
+            // print(parent);
+
+        // for (int k = 0; k < matrix.length; k++) {
+        //     for (int i = 0; i < matrix.length; i++) {
+        //         for (int j = 0; j < matrix.length; j++) {
+        //             if(matrix[i][k] + matrix[k][j] < matrix[i][j]){
+        //                 parent[i][j] = parent[k][j];
+        //             }
+        //         }
+        //     }
+        // }
+
+        print(parent);
+
+        getRoute(key1, key2, list);
+
+        return list;
+    }
+
+    public void getRoute(int key1, int key2, ArrayList<Integer> list ){
+        if( key1 != key2){
+            getRoute(key1, parent[key1][key2], list);
+        }
+        list.add(key2);
     }
 
     public void printMinDist() {
-        print(matriz);
+        print(matrix);
 
         for (int i = 0; i < numNodes; i++) {
             for (int j = 0; j < numNodes; j++) {
                 for (int k = 0; k < numNodes; k++) {
-                    if (matriz[j][i] != Integer.MAX_VALUE && matriz[i][k] != Integer.MAX_VALUE) {
-                        if (matriz[j][k] > matriz[j][i] + matriz[i][k]) {
-                            matriz[j][k] = matriz[j][i] + matriz[i][k];
+                    if (matrix[j][i] != Integer.MAX_VALUE && matrix[i][k] != Integer.MAX_VALUE) {
+                        if (matrix[j][k] > matrix[j][i] + matrix[i][k]) {
+                            matrix[j][k] = matrix[j][i] + matrix[i][k];
                         }
                     }
                 }
             }
-            print(matriz);
+            print(matrix);
             System.out.println("-------------------------------------------------");
         }
     }

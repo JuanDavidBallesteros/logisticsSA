@@ -5,9 +5,6 @@ import java.util.*;
 
 import com.opencsv.CSVWriter;
 
-import collections.graph.AdjacencyList;
-import collections.graph.AdjacencyMatrix;
-
 public class CSVManagement {
 
     public ArrayList<Store> importStores(String path, int nodes) throws IOException, FileNotFoundException {

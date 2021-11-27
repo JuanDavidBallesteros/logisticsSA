@@ -9,14 +9,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import model.App;
-import routes.Routes;
 
 public class ConfigurationController {
 
     private App app;
+    private MainGui generalController;
 
     @FXML
     private AnchorPane mainPane;
@@ -32,6 +33,7 @@ public class ConfigurationController {
 
     public ConfigurationController(App app) {
         this.app = app;
+        this.generalController =  new MainGui(app);
     }
 
     @FXML
@@ -41,7 +43,8 @@ public class ConfigurationController {
             fileChooser.setTitle("Choose File");
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow()); // stage.getScene().getWindow() - stage
             if (file != null) {
-                    app.importStores(file.getPath());
+                    int num = app.importStores(file.getPath());
+                    generalController.alert(AlertType.INFORMATION, "Datos importados", "Se importaron " + num + " datos");
                 }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -56,7 +59,9 @@ public class ConfigurationController {
             fileChooser.setTitle("Choose File");
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow()); // stage.getScene().getWindow() - stage
             if (file != null) {
-                app.importConnections(file.getPath());
+                int num = app.importConnections(file.getPath());
+                generalController.alert(AlertType.INFORMATION, "Datos importados", "Se importaron " + num + " datos");
+
             }
         } catch (IOException | GraphException e) {
             e.printStackTrace();
