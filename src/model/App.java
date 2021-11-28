@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import collections.graph.AdjacencyList;
 import collections.graph.AdjacencyMatrix;
 import exception.GraphException;
 
@@ -14,8 +13,7 @@ public class App {
 
     private CSVManagement csv;
 
-    private AdjacencyList<Integer, Store> graph4Routes;
-    private AdjacencyMatrix<Integer, Store> graph4Cost;
+    private AdjacencyMatrix<Integer, Store> graph;
 
     private int smallCars, mediumCars, bigCars, nodes;
 
@@ -25,26 +23,57 @@ public class App {
         mediumStores = new ArrayList<>();
         bigStores = new ArrayList<>();
 
-        graph4Routes = new AdjacencyList<>();
-
         csv = new CSVManagement();
     }
 
-    public void setVariables(int nodes, int small, int medium, int big){
-        graph4Cost = new AdjacencyMatrix<>(nodes);
+    public void setVariables(int small, int medium, int big){
         smallCars = small;
         mediumCars = medium;
         bigCars = big; 
     }
 
+    // -----------------------------------------------> Calculate
+
+    public Result calculate(){
+        Result result = new Result();
+
+        splitListByCars(smallStores, smallCars, result.getListSmall());
+        splitListByCars(mediumStores, mediumCars, result.getListMedium());
+        splitListByCars(bigStores, bigCars, result.getListBig());
+
+        return result;
+    }
+
+    private void splitListByCars(ArrayList<Store> list, int amount, ArrayList<Car> resultList ){
+
+        int cantidad = (int) list.size()/amount;
+        int count = 0;
+        
+
+        for (int i = 0; i < cantidad; i++) {
+            Car temp = new Car();
+            temp.getDestinations().add(list.get(count));
+            count++;
+            resultList.add(temp);
+        }
+
+        while (count < list.size()) {
+            Car temp = new Car();
+            temp.getDestinations().add(list.get(count));
+            count++;
+            resultList.add(temp);
+        }
+
+    }
+
     // -----------------------------------------------> Imports / Exports
 
     public int importStores(String path) throws FileNotFoundException, IOException{
-        ArrayList<Store> list = csv.importStores(path, nodes);
-        graph4Cost = new AdjacencyMatrix<>(nodes);
+        ArrayList<Store> list = csv.importStores(path, nodes,smallStores, mediumStores, bigStores);
+        graph = new AdjacencyMatrix<>(list.size());
+
         for (Store store : list) {
-            graph4Routes.addNode(store, store.getId());
-            graph4Cost.addNode(store, store.getId());
+            graph.addNode(store, store.getId());
         }
 
         return list.size();
@@ -52,12 +81,12 @@ public class App {
 
     public int importConnections(String path) throws GraphException, FileNotFoundException, IOException{
         ArrayList<Connection<Integer>> list = csv.importConnections(path);
-        graph4Cost = new AdjacencyMatrix<>(nodes);
+        
         for (Connection<Integer> edge : list) {
-            Store s1 = graph4Routes.getNode(edge.getNode1()); 
-            Store s2 = graph4Routes.getNode(edge.getNode2());
-            graph4Routes.addEdge(s1, s2);
-            graph4Cost.addEdge(s1, s2, edge.getWeight());
+            Store s1 = graph.getNode(edge.getNode1()); 
+            Store s2 = graph.getNode(edge.getNode2());
+            
+            graph.addEdge(s1, s2, edge.getWeight());
         }
         return list.size();
     }
@@ -101,20 +130,12 @@ public class App {
         this.csv = csv;
     }
 
-    public AdjacencyList<Integer, Store> getGraph4Routes() {
-        return graph4Routes;
+    public AdjacencyMatrix<Integer, Store> getgraph() {
+        return graph;
     }
 
-    public void setGraph4Routes(AdjacencyList<Integer, Store> graph4Routes) {
-        this.graph4Routes = graph4Routes;
-    }
-
-    public AdjacencyMatrix<Integer, Store> getGraph4Cost() {
-        return graph4Cost;
-    }
-
-    public void setGraph4Cost(AdjacencyMatrix<Integer, Store> graph4Cost) {
-        this.graph4Cost = graph4Cost;
+    public void setgraph(AdjacencyMatrix<Integer, Store> graph) {
+        this.graph = graph;
     }
 
     public int getSmallCars() {

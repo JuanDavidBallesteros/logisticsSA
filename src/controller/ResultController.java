@@ -1,61 +1,64 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import model.App;
+import model.Car;
+import model.Result;
 
 public class ResultController {
 
     private App app;
+    private Result result;
 
     @FXML
     private AnchorPane mainPane;
 
     @FXML
-    private TableView<?> smallStoresTV;
+    private TableView<Car> smallStoresTV;
 
     @FXML
-    private TableColumn<?, ?> idSS;
+    private TableColumn<Car, Integer> costSS;
 
     @FXML
-    private TableColumn<?, ?> ownerSS;
+    private TableColumn<Car, String> ownerSS;
 
     @FXML
-    private TableColumn<?, ?> orderSS;
+    private TableView<Car> mediumStoresTV;
 
     @FXML
-    private TableView<?> mediumStoresTV;
+    private TableColumn<Car, Integer> costMS;
 
     @FXML
-    private TableColumn<?, ?> idMS;
+    private TableColumn<Car, String> ownerMS;
 
     @FXML
-    private TableColumn<?, ?> ownerMS;
+    private TableView<Car> bigStoresTV;
 
     @FXML
-    private TableColumn<?, ?> orderMS;
+    private TableColumn<Car, Integer> costBS;
 
     @FXML
-    private TableView<?> bigStoresTV;
+    private TableColumn<Car, String> ownerBS;
 
-    @FXML
-    private TableColumn<?, ?> idBS;
-
-    @FXML
-    private TableColumn<?, ?> ownerBS;
-
-    @FXML
-    private TableColumn<?, ?> orderBS;
-
-    public ResultController(App app) {
+    public ResultController(App app, Result result) {
         this.app = app;
+        this.result = result;
     }
 
     @FXML
@@ -75,5 +78,52 @@ public class ResultController {
     void export(ActionEvent event) {
 
     }
+
+    public void initializeTableView() {
+
+        ObservableList<Car> observableList1 = FXCollections.observableArrayList(result.getListSmall());
+        ObservableList<Car> observableList2 = FXCollections.observableArrayList(result.getListMedium());
+        ObservableList<Car> observableList3 = FXCollections.observableArrayList(result.getListBig());
+
+        costSS.setCellValueFactory(new PropertyValueFactory<Car, Integer>("cost"));
+        ownerSS.setCellValueFactory(new Callback<CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Car, String> data) {
+                return new ReadOnlyStringWrapper(Arrays.toString(data.getValue().getDestinations().toArray()));
+            }
+        });
+
+        costMS.setCellValueFactory(new PropertyValueFactory<Car, Integer>("cost"));
+        ownerMS.setCellValueFactory(new Callback<CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Car, String> data) {
+                return new ReadOnlyStringWrapper(Arrays.toString(data.getValue().getDestinations().toArray()));
+            }
+        });
+
+        costBS.setCellValueFactory(new PropertyValueFactory<Car, Integer>("cost"));
+        ownerBS.setCellValueFactory(new Callback<CellDataFeatures<Car, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Car, String> data) {
+                return new ReadOnlyStringWrapper(Arrays.toString(data.getValue().getDestinations().toArray()));
+            }
+        });
+
+        smallStoresTV.setItems(observableList1);
+        mediumStoresTV.setItems(observableList2);
+        bigStoresTV.setItems(observableList3);
+
+    }
+
+    /*
+     * bagCol.setCellValueFactory(new Callback<CellDataFeatures<Client, String>,
+     * ObservableValue<String>>() {
+     * 
+     * @Override
+     * public ObservableValue<String> call(CellDataFeatures<Client, String> data) {
+     * return new ReadOnlyStringWrapper(data.getValue().getBag().toString());
+     * }
+     * });
+     */
 
 }

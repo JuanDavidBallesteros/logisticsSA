@@ -48,7 +48,7 @@ public class Store {
 
     @Override
     public String toString() {
-        return id + "," + owner + "," + order;
+        return id + "|" + owner;
     }
 
 }
