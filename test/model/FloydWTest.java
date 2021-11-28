@@ -60,18 +60,23 @@ public class FloydWTest {
 	public void testRoute() throws Exception {
 		setupScenery1();
 		
-		int[][] validate = {
-			{0 , 5 , 3 , 4 , 18 , 19},
-			{5 , 0 , 2 , 1 , 13 , 14},
-			{3 , 2 , 0 , 1 , 15 , 16},
-			{4 , 1 , 1 , 0 , 14 , 15},
-			{18 , 13 , 15 , 14 , 0 , 1},
-			{19 , 14 , 16 , 15 , 1 , 0}
+		int[] validate = {
+			0, 2, 3
 		};
 
 		FloydW m = new FloydW(dis);
 		ArrayList<Integer> result = m.route(0, 3);
-		System.out.println(result);		
+
+        int[] num = new int[result.size()];
+
+        for (int i = 0; i < result.size(); i++) {
+            num[i] = result.get(i);
+        }
+
+        for(int i=0; i < result.size(); i++) {
+            assertEquals(validate[i], num[i]);
+        }
+			
 	}
 
     @Test

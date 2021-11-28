@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Hashtable;
-
 public class Dijkstra {
 
     public int[] dijkstraAlgorithm(int n, int src, int matrix[][]){
