@@ -135,9 +135,10 @@ public class ResultController {
                         
                         modal.initModality(Modality.APPLICATION_MODAL);
                         modal.initStyle(StageStyle.UNDECORATED);
-                        modal.setTitle("Ruta de vehiculo");
                         modal.setScene(new Scene(root1));
                         modal.show();
+
+                        controller.init();
 
                     } catch (IOException e) {
                         e.printStackTrace();

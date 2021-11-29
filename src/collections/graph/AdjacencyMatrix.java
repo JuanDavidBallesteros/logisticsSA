@@ -21,6 +21,17 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
         searchMap = new HashMap<>();
         numbers = new HashMap<>();
         this.nodesNum = nodesNum;
+        setNoConnectionCost();
+    }
+
+    private void setNoConnectionCost(){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if(i != j){
+                    matrix[i][j] = 15;
+                }
+            }
+        }
     }
 
     @Override
@@ -83,6 +94,10 @@ public class AdjacencyMatrix<K,V> implements GraphActions<K,V> {
 
     public int getPosByKey(K key) {
         return searchMap.get(nodes.get(key));
+    }
+
+    public int getPosByNode(V node) {
+        return searchMap.get(node);
     }
     
     @Override

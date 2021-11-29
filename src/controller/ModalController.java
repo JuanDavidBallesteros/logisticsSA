@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Arrays;
-
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -45,6 +43,11 @@ public class ModalController {
     public ModalController(Car car, Stage stage){
         this.car = car;
         this.stage = stage;
+    }
+
+    public void init(){
+        costoTF.setText(car.getCost()+"");
+        initializeTableView();
     }
 
     public void initializeTableView(){

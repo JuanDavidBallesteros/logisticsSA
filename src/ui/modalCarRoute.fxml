@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="966.0" styleClass="bg1" stylesheets="@assest/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="966.0" styleClass="bg2" stylesheets="@assest/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="81.0" layoutY="47.0" styleClass="title1" text="Detalle" />
       <Label layoutX="264.0" layoutY="68.0" styleClass="title2" text="Logistics S.A." />
@@ -30,7 +30,7 @@
       </TableView>
       <Label layoutX="100.0" layoutY="139.0" styleClass="title2" text="Costo de la ruta" />
       <Label layoutX="538.0" layoutY="121.0" styleClass="title2" text="Ruta a seguir" />
-      <Button layoutX="885.0" layoutY="125.0" mnemonicParsing="false" onAction="#hideBTN" styleClass="basicBTN" text="Volver" />
+      <Button layoutX="831.0" layoutY="47.0" mnemonicParsing="false" onAction="#hideBTN" styleClass="basicBTN" text="Volver" />
       <Label fx:id="costoTF" layoutX="110.0" layoutY="192.0" prefHeight="59.0" prefWidth="197.0" styleClass="title1" text="#" textAlignment="CENTER" />
    </children>
 </AnchorPane>

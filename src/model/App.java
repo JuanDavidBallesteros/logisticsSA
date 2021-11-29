@@ -55,10 +55,52 @@ public class App {
                 temp.getDestinations().add(list.get(count));
                 count++;
             }
-            
+            calculateCost(temp);
+            calculateRoute(temp);
             resultList.add(temp);
         }
 
+    }
+
+    private void calculateCost(Car car){
+
+        FloydW floyd = new FloydW(graph.getMatrix());
+
+        int cost = 0;
+        int[][] costMatrix =  floyd.calculate();
+
+        for (int i = 1; i < car.getDestinations().size(); i++) {
+            int x = graph.getPosByKey(car.getDestinations().get(i-1).getId());
+            int y = graph.getPosByKey(car.getDestinations().get(i).getId());
+            cost += costMatrix[x][y];
+        }
+        
+        car.setCost(cost);
+    }
+
+    private void calculateRoute(Car car){
+
+        FloydW floyd = new FloydW(graph.getMatrix());
+
+        ArrayList<Store> route = new ArrayList<>();
+
+        for (int i = 1; i < car.getDestinations().size(); i++) {
+            int x = graph.getPosByKey(car.getDestinations().get(i-1).getId());
+            int y = graph.getPosByKey(car.getDestinations().get(i).getId());
+            ArrayList<Integer> steps = floyd.route(x, y);
+            for (int pos : steps) {
+                Store temp = graph.getNodeByPos(pos);
+                if(!route.isEmpty()){
+                    if(temp.equals(route.get(route.size()))){
+
+                    } else {
+                        route.add(temp);
+                    }
+                }
+            }
+        }
+        
+        car.setRoute(route);
     }
 
     // -----------------------------------------------> Imports / Exports
