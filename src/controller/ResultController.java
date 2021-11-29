@@ -12,9 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -22,9 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import model.App;
-import model.Car;
-import model.Result;
+import model.*;
 
 public class ResultController {
 
@@ -81,11 +77,6 @@ public class ResultController {
         }
     }
 
-    @FXML
-    void export(ActionEvent event) {
-
-    }
-
     public void initializeTableView() {
 
         ObservableList<Car> observableList1 = FXCollections.observableArrayList(result.getListSmall());
@@ -136,7 +127,7 @@ public class ResultController {
                     try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ui/modalCarRoute.fxml"));
                         Stage modal = new Stage();
-                        ModalController controller = new ModalController(item, modal);
+                        ModalController controller = new ModalController(item, modal, app);
                         fxmlLoader.setController(controller);
                         Parent root1 = (Parent) fxmlLoader.load();
 

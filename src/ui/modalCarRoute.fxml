@@ -30,7 +30,8 @@
       </TableView>
       <Label layoutX="100.0" layoutY="139.0" styleClass="title2" text="Costo de la ruta" />
       <Label layoutX="538.0" layoutY="121.0" styleClass="title2" text="Ruta a seguir" />
-      <Button layoutX="831.0" layoutY="47.0" mnemonicParsing="false" onAction="#hideBTN" styleClass="basicBTN" text="Volver" />
+      <Button layoutX="682.0" layoutY="52.0" mnemonicParsing="false" onAction="#hideBTN" styleClass="basicBTN" text="Volver" />
       <Label fx:id="costoTF" layoutX="110.0" layoutY="192.0" prefHeight="59.0" prefWidth="197.0" styleClass="title1" text="#" textAlignment="CENTER" />
+      <Button layoutX="780.0" layoutY="52.0" mnemonicParsing="false" onAction="#export" prefHeight="32.0" prefWidth="140.0" styleClass="goBTN" text="Exportar" textOverrun="LEADING_WORD_ELLIPSIS" />
    </children>
 </AnchorPane>

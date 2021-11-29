@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,7 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.*;
@@ -40,9 +45,15 @@ public class ModalController {
         stage.close();
     }
 
-    public ModalController(Car car, Stage stage){
+    private MainGui generalController;
+
+    private App app;
+
+    public ModalController(Car car, Stage stage, App app){
         this.car = car;
         this.stage = stage;
+        generalController = new MainGui(app);
+        this.app = app;
     }
 
     public void init(){
@@ -72,4 +83,24 @@ public class ModalController {
         destinationsTV.setItems(observableList1);
         routeTV.setItems(observableList2);
     }
+
+    @FXML
+    void export(ActionEvent event) {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File file = fileChooser.showSaveDialog(costoTF.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                app.exportList(file, car.getRoute());
+
+            } catch ( IOException e1 ) {
+
+                generalController.alert(AlertType.ERROR, "ERROR", "Data save fail");
+                e1.printStackTrace();
+            }
+        }
+    }
+
 }
