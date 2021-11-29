@@ -62,7 +62,7 @@ public class ResultController {
     private TableColumn<Car, String> ownerBS;
 
     // -------------------------------------------> modal
-    
+
     public ResultController(App app, Result result) {
         this.app = app;
         this.result = result;
@@ -120,7 +120,14 @@ public class ResultController {
         mediumStoresTV.setItems(observableList2);
         bigStoresTV.setItems(observableList3);
 
-        smallStoresTV.setRowFactory(tv -> {
+        rowAction(smallStoresTV);
+        rowAction(mediumStoresTV);
+        rowAction(bigStoresTV);
+
+    }
+
+    private void rowAction(TableView<Car> table) {
+        table.setRowFactory(tv -> {
             TableRow<Car> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -132,7 +139,7 @@ public class ResultController {
                         ModalController controller = new ModalController(item, modal);
                         fxmlLoader.setController(controller);
                         Parent root1 = (Parent) fxmlLoader.load();
-                        
+
                         modal.initModality(Modality.APPLICATION_MODAL);
                         modal.initStyle(StageStyle.UNDECORATED);
                         modal.setScene(new Scene(root1));
@@ -147,7 +154,6 @@ public class ResultController {
             });
             return row;
         });
-
     }
 
 }

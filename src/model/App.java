@@ -90,12 +90,14 @@ public class App {
             ArrayList<Integer> steps = floyd.route(x, y);
             for (int pos : steps) {
                 Store temp = graph.getNodeByPos(pos);
+                
                 if(!route.isEmpty()){
-                    if(temp.equals(route.get(route.size()))){
-
+                    if(temp.equals(route.get(route.size()-1))){
                     } else {
                         route.add(temp);
                     }
+                } else {
+                    route.add(temp);
                 }
             }
         }
