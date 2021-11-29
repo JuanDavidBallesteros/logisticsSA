@@ -13,8 +13,8 @@
       <Button layoutX="1022.0" layoutY="44.0" mnemonicParsing="false" onAction="#export" prefHeight="49.0" prefWidth="182.0" styleClass="goBTN" text="Exportar" textOverrun="LEADING_WORD_ELLIPSIS" />
       <TableView fx:id="smallStoresTV" layoutX="97.0" layoutY="216.0" prefHeight="200.0" prefWidth="328.0" stylesheets="@assest/style/table.css" AnchorPane.bottomAnchor="100.0" AnchorPane.topAnchor="200.0">
         <columns>
-          <TableColumn fx:id="costSS" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="ownerSS" prefWidth="75.0" text="Dueño" />
+          <TableColumn fx:id="costSS" prefWidth="70.0" text="Costo" />
+          <TableColumn fx:id="ownerSS" prefWidth="256.0" text="Dueño" />
             <!-- <TableColumn fx:id="orderSS" prefWidth="75.0" text="Pedido" /> -->
         </columns>
          <columnResizePolicy>
@@ -23,8 +23,8 @@
       </TableView>
       <TableView fx:id="mediumStoresTV" layoutX="473.0" layoutY="216.0" prefHeight="200.0" prefWidth="328.0" stylesheets="@assest/style/table.css" AnchorPane.bottomAnchor="100.0" AnchorPane.topAnchor="200.0">
          <columns>
-            <TableColumn fx:id="costMS" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="ownerMS" prefWidth="75.0" text="Dueño" />
+            <TableColumn fx:id="costMS" prefWidth="88.0" text="Costo" />
+            <TableColumn fx:id="ownerMS" prefWidth="238.0" text="Dueño" />
             <!-- <TableColumn fx:id="orderMS" prefWidth="75.0" text="Pedido" /> -->
          </columns>
          <columnResizePolicy>
@@ -33,8 +33,8 @@
       </TableView>
       <TableView fx:id="bigStoresTV" layoutX="842.0" layoutY="216.0" prefHeight="200.0" prefWidth="328.0" stylesheets="@assest/style/table.css" AnchorPane.bottomAnchor="100.0" AnchorPane.topAnchor="200.0">
          <columns>
-            <TableColumn fx:id="costBS" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="ownerBS" prefWidth="75.0" text="Dueño" />
+            <TableColumn fx:id="costBS" prefWidth="73.0" text="Costo" />
+            <TableColumn fx:id="ownerBS" prefWidth="253.0" text="Dueño" />
             <!-- <TableColumn fx:id="orderBS" prefWidth="75.0" text="Pedido" /> -->
          </columns>
          <columnResizePolicy>

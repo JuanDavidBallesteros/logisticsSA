@@ -17,8 +17,7 @@ public class App {
 
     private int smallCars, mediumCars, bigCars, nodes;
 
-    
-    public App(){
+    public App() {
         smallStores = new ArrayList<>();
         mediumStores = new ArrayList<>();
         bigStores = new ArrayList<>();
@@ -26,15 +25,15 @@ public class App {
         csv = new CSVManagement();
     }
 
-    public void setVariables(int small, int medium, int big){
+    public void setVariables(int small, int medium, int big) {
         smallCars = small;
         mediumCars = medium;
-        bigCars = big; 
+        bigCars = big;
     }
 
     // -----------------------------------------------> Calculate
 
-    public Result calculate(){
+    public Result calculate() {
         Result result = new Result();
 
         splitListByCars(smallStores, smallCars, result.getListSmall());
@@ -44,23 +43,19 @@ public class App {
         return result;
     }
 
-    private void splitListByCars(ArrayList<Store> list, int amount, ArrayList<Car> resultList ){
+    private void splitListByCars(ArrayList<Store> list, int amount, ArrayList<Car> resultList) {
 
-        int cantidad = (int) list.size()/amount;
+        int cantidad = (int) list.size() / amount;
         int count = 0;
-        
 
-        for (int i = 0; i < cantidad; i++) {
+        for (int i = 0; i < amount; i++) {
             Car temp = new Car();
-            temp.getDestinations().add(list.get(count));
-            count++;
-            resultList.add(temp);
-        }
 
-        while (count < list.size()) {
-            Car temp = new Car();
-            temp.getDestinations().add(list.get(count));
-            count++;
+            for (int j = 0; j < cantidad && count < list.size(); j++) {
+                temp.getDestinations().add(list.get(count));
+                count++;
+            }
+            
             resultList.add(temp);
         }
 
@@ -68,8 +63,8 @@ public class App {
 
     // -----------------------------------------------> Imports / Exports
 
-    public int importStores(String path) throws FileNotFoundException, IOException{
-        ArrayList<Store> list = csv.importStores(path, nodes,smallStores, mediumStores, bigStores);
+    public int importStores(String path) throws FileNotFoundException, IOException {
+        ArrayList<Store> list = csv.importStores(path, nodes, smallStores, mediumStores, bigStores);
         graph = new AdjacencyMatrix<>(list.size());
 
         for (Store store : list) {
@@ -79,22 +74,21 @@ public class App {
         return list.size();
     }
 
-    public int importConnections(String path) throws GraphException, FileNotFoundException, IOException{
+    public int importConnections(String path) throws GraphException, FileNotFoundException, IOException {
         ArrayList<Connection<Integer>> list = csv.importConnections(path);
-        
+
         for (Connection<Integer> edge : list) {
-            Store s1 = graph.getNode(edge.getNode1()); 
+            Store s1 = graph.getNode(edge.getNode1());
             Store s2 = graph.getNode(edge.getNode2());
-            
+
             graph.addEdge(s1, s2, edge.getWeight());
         }
         return list.size();
     }
 
-    public void exportList(File file, ArrayList<Store> list) throws IOException{
+    public void exportList(File file, ArrayList<Store> list) throws IOException {
         csv.exportRoutes(file, list);
     }
-
 
     // -----------------------------------------------> Getter and Setters
 
@@ -134,7 +128,7 @@ public class App {
         return graph;
     }
 
-    public void setgraph(AdjacencyMatrix<Integer, Store> graph) {
+    public void setGraph(AdjacencyMatrix<Integer, Store> graph) {
         this.graph = graph;
     }
 
@@ -162,7 +156,4 @@ public class App {
         this.bigCars = bigCars;
     }
 
-
-    
-    
 }

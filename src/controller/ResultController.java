@@ -11,11 +11,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import model.App;
 import model.Car;
@@ -56,6 +61,8 @@ public class ResultController {
     @FXML
     private TableColumn<Car, String> ownerBS;
 
+    // -------------------------------------------> modal
+    
     public ResultController(App app, Result result) {
         this.app = app;
         this.result = result;
@@ -113,17 +120,33 @@ public class ResultController {
         mediumStoresTV.setItems(observableList2);
         bigStoresTV.setItems(observableList3);
 
-    }
+        smallStoresTV.setRowFactory(tv -> {
+            TableRow<Car> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Car item = row.getItem();
 
-    /*
-     * bagCol.setCellValueFactory(new Callback<CellDataFeatures<Client, String>,
-     * ObservableValue<String>>() {
-     * 
-     * @Override
-     * public ObservableValue<String> call(CellDataFeatures<Client, String> data) {
-     * return new ReadOnlyStringWrapper(data.getValue().getBag().toString());
-     * }
-     * });
-     */
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../ui/modalCarRoute.fxml"));
+                        Stage modal = new Stage();
+                        ModalController controller = new ModalController(item, modal);
+                        fxmlLoader.setController(controller);
+                        Parent root1 = (Parent) fxmlLoader.load();
+                        
+                        modal.initModality(Modality.APPLICATION_MODAL);
+                        modal.initStyle(StageStyle.UNDECORATED);
+                        modal.setTitle("Ruta de vehiculo");
+                        modal.setScene(new Scene(root1));
+                        modal.show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
+
+    }
 
 }
