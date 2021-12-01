@@ -1,59 +1,43 @@
 package model;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DFSTest {
-
-    public void setupScenery(){
-//     Graph graph = new Graph();
-
-//     Vertex v1= new Vertex('A');
-//     Vertex v2= new Vertex('B');
-//     Vertex v3= new Vertex('C');
-//     Vertex v4= new Vertex('D');
-//     Vertex v5= new Vertex('E');
-//     Vertex v6= new Vertex('F');
+    private DFS dfs = new DFS();
+    ArrayList<String> out = new ArrayList<>();
 
 
-//         graph.addNode(v1);
-//         graph.addNode(v2);
-//         graph.addNode(v3);
-//         graph.addNode(v4);
-//         graph.addNode(v5);
-//         graph.addNode(v6);
+    public void setupScenery1(){
 
-//         graph.addEdgeBFS(v1, v2, 2);
-//         graph.addEdgeBFS(v1, v3, 5);
-//         graph.addEdgeBFS(v1, v4, 6);
-//         graph.addEdgeBFS(v3, v5, 1);
-//         graph.addEdgeBFS(v3, v6, 2);
+        dfs.Graph(4);
+
+        dfs.addEdge(0,1);
+        dfs.addEdge(0,2);
+        dfs.addEdge(1,2);
+        dfs.addEdge(2,0);
+        dfs.addEdge(2,3);
+        dfs.addEdge(3,3);
+
+
 
     
     }
 
     @Test
-    public void test() {
+    public void DFSTest() {
 
-        DFS dfs = new DFS();
+        setupScenery1();
 
+        out.add("2");
+        out.add("0");
+        out.add("1");
+        out.add("3");
 
-        // assertEquals("The method should return output based on DFS",
-        //         "A B C D E F ", dfs.getReadable(dfs.performDFS(graph, v1)));
-        // assertEquals("The method should return output based on DFS",
-        //         "C E F ", dfs.getReadable(dfs.performDFS(graph, v3)));
-        // assertEquals("The method should return output based on DFS",
-        //         "B ", dfs.getReadable(dfs.performDFS(graph, v2)));
-        // assertEquals("The method should return output based on DFS",
-        //         "D ", dfs.getReadable(dfs.performDFS(graph, v4)));
-        // assertEquals("The method should return output based on DFS",
-        //         "E ", dfs.getReadable(dfs.performDFS(graph, v5)));
-        // assertEquals("The method should return output based on DFS",
-        //         "F ", dfs.getReadable(dfs.performDFS(graph, v6)));
+        assertEquals(out,dfs.DFS(2));
 
     }
 
